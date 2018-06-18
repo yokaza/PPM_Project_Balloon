@@ -14,6 +14,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public GamePanel (Context context) {
         super(context);
         getHolder().addCallback(this);
+        Constants.CURRENT_CONTEXT = context;
+
         thread = new MainThread(getHolder(), this);
         manager = new SceneManager();
 

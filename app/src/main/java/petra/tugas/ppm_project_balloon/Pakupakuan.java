@@ -1,7 +1,5 @@
 package petra.tugas.ppm_project_balloon;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -12,9 +10,6 @@ public class Pakupakuan implements GameObject {
     private int color;
     private int startX;
     private int playerGap;
-
-    private Animation nails;
-    private AnimationManager animationManager;
 
     public Rect getRectangle() {
         return rectangle;
@@ -31,15 +26,9 @@ public class Pakupakuan implements GameObject {
         this.color = color;
         //left top right bot
 
-        rectangle = new Rect(startX,startY,startX+rectHeight/8,startY + rectHeight);
-        rectangle2 = new Rect(startX + playerGap + rectHeight/8, startY, startX + playerGap + rectHeight/4, startY + rectHeight);
+        rectangle = new Rect(startX,startY,startX+50,startY + rectHeight);
+        rectangle2 = new Rect(startX + playerGap + 50, startY, startX + playerGap + 100, startY + rectHeight);
 
-        BitmapFactory bf = new BitmapFactory();
-        Bitmap img_nails = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.nails);
-
-        nails = new Animation(new Bitmap[]{img_nails},2);
-
-        animationManager = new AnimationManager(new Animation[]{nails});
     }
 
     public boolean playerCollide(Player player) {
@@ -59,20 +48,15 @@ public class Pakupakuan implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        /*
         Paint paint = new Paint();
         paint.setColor(color);
         canvas.drawRect(rectangle,paint);
         canvas.drawRect(rectangle2,paint);
-        */
-        animationManager.playAnim(0);
-        animationManager.draw(canvas,rectangle);
-        animationManager.draw(canvas,rectangle2);
+
     }
 
     @Override
     public void update() {
-        animationManager.playAnim(0);
-        animationManager.update();
+
     }
 }

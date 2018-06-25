@@ -32,9 +32,9 @@ public class Player implements GameObject{
         Bitmap img_blowLeft = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.blowleft);
         Bitmap img_blowRight = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.blowright);
 
-        idle = new Animation(new Bitmap[]{img_idle, img_idle},2);
-        blowLeft = new Animation(new Bitmap[]{img_blowLeft, img_blowLeft},2);
-        blowRight = new Animation(new Bitmap[]{img_blowRight, img_blowRight},2);
+        idle = new Animation(new Bitmap[]{img_idle},2);
+        blowLeft = new Animation(new Bitmap[]{img_blowLeft},0.5f);
+        blowRight = new Animation(new Bitmap[]{img_blowRight},0.5f);
 
         animationManager = new AnimationManager(new Animation[]{idle, blowRight, blowLeft});
 

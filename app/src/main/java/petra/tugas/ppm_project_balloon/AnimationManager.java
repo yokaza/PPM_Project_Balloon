@@ -12,7 +12,8 @@ public class AnimationManager {
     public void playAnim(int index) {
         for(int i=0;i<animations.length;i++){
             if(i==index)
-                animations[i].play();
+                if(!animations[index].isPlaying())
+                    animations[i].play();
             else
                 animations[i].stop();
         }

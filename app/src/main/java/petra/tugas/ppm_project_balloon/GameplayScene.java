@@ -25,12 +25,11 @@ public class GameplayScene implements Scene {
 
     public GameplayScene() {
         //player
-        //
-        player = new Player(new Rect(0,0,Constants.SCREEN_WIDTH/5,Constants.SCREEN_WIDTH/5), Color.rgb(255, 0,0 ));
+        player = new Player(new Rect(100,100,200,200), Color.rgb(255, 0,0 ));
         playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
         //obstacles
-        obstacleManager = new ObstacleManager(Constants.SCREEN_WIDTH/3, Constants.SCREEN_HEIGHT/5,Constants.SCREEN_HEIGHT/10, Color.BLACK);
+        obstacleManager = new ObstacleManager(200, 350,75, Color.BLACK);
 
         orientationData = new OrientationData();
         orientationData.register();

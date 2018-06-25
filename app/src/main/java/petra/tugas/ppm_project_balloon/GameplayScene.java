@@ -60,7 +60,7 @@ public class GameplayScene implements Scene {
                 float ySpeed = pitch * Constants.SCREEN_HEIGHT/1000f;
 
                 playerPoint.x += Math.abs(xSpeed * elapsedTime) > 5 ? xSpeed*elapsedTime : 0;
-                playerPoint.y -= Math.abs(ySpeed * elapsedTime) > 5 ? ySpeed*elapsedTime : 0;
+                //playerPoint.y -= Math.abs(ySpeed * elapsedTime) > 5 ? ySpeed*elapsedTime : 0;
             }
 
             if(playerPoint.x < 0)

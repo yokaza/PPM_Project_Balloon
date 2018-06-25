@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -20,6 +21,12 @@ public class MainActivity extends Activity {
         Constants.SCREEN_WIDTH=dm.widthPixels;
         Constants.SCREEN_HEIGHT=dm.heightPixels;
 
+        setContentView(R.layout.activity_main);
+    }
+    public void PlayGame(View v) {
         setContentView(new GamePanel(this));
+    }
+    public void HighScores(View v) {
+
     }
 }

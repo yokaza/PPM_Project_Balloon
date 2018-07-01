@@ -1,17 +1,22 @@
 package petra.tugas.ppm_project_balloon;
 
+import android.app.Activity;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
-public class SceneManager {
+public class SceneManager{
     private ArrayList<Scene> scenes = new ArrayList<>();
     public static int ACTIVE_SCENE;
+    public static boolean RETRY=true;
 
     public SceneManager() {
         ACTIVE_SCENE = 0;
-        scenes.add(new GameplayScene());
+        if(ACTIVE_SCENE==0) {
+            scenes.add(new GameplayScene());
+            RETRY=true;
+        }
     }
 
     public void recieveTouch(MotionEvent event) {

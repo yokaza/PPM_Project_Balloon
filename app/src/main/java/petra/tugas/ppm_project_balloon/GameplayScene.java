@@ -102,7 +102,7 @@ public class GameplayScene implements Scene {
 
     @Override
     public void terminate() {
-        SceneManager.ACTIVE_SCENE = 0;
+        SceneManager.RETRY = false;
     }
 
     @Override
@@ -115,6 +115,7 @@ public class GameplayScene implements Scene {
                     reset();
                     gameOver = false;
                     orientationData.newGame();
+                    terminate();
                 }
                 break;
             case MotionEvent.ACTION_MOVE:

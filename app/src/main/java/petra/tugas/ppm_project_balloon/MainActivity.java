@@ -1,6 +1,7 @@
 package petra.tugas.ppm_project_balloon;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -24,7 +25,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     }
     public void PlayGame(View v) {
-        setContentView(new GamePanel(this));
+        //setContentView(new GamePanel(this));
+        Intent in = new Intent(this, GameActivity.class);
+        startActivity(in);
     }
     public void HighScores(View v) {
 

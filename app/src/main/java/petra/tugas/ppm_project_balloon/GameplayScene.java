@@ -28,6 +28,7 @@ public class GameplayScene implements Scene {
 
     private long sizeDownTime;
     private int sizeDownCount=0;
+    private boolean firstUp=false;
 
     public GameplayScene() {
         //player
@@ -119,7 +120,7 @@ public class GameplayScene implements Scene {
     public void recieveTouch(MotionEvent event) {
         switch(event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if(doubleClick && System.currentTimeMillis() - doubleClickTime <= 1000 && sizeDownCount<2) {
+                if(doubleClick && System.currentTimeMillis() - doubleClickTime <= 1000 && sizeDownCount<3) {
                     player.sizeUp(playerPoint);
                     sizeDownTime = System.currentTimeMillis();
                     doubleClick=false;

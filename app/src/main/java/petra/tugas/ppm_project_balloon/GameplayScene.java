@@ -23,10 +23,17 @@ public class GameplayScene implements Scene {
     private OrientationData orientationData;
     private long frameTime;
 
+    private Boolean doubleClick=false;
+    private long doubleClickTime;
+
+    private long sizeDownTime;
+    private int sizeDownCount=0;
+    private boolean firstUp=false;
+
     public GameplayScene() {
         //player
         //
-        player = new Player(new Rect(0,0,Constants.SCREEN_WIDTH/5,Constants.SCREEN_WIDTH/5), Color.rgb(255, 0,0 ));
+        player = new Player(new Rect(0,0,Constants.SCREEN_WIDTH/10,Constants.SCREEN_WIDTH/10), Color.rgb(255, 0,0 ));
         playerPoint = new Point(Constants.SCREEN_WIDTH/2,3*Constants.SCREEN_HEIGHT/4);
         player.update(playerPoint);
         //obstacles
@@ -80,6 +87,10 @@ public class GameplayScene implements Scene {
                 gameOver = true;
                 gameOverTime = System.currentTimeMillis();
             }
+            if(sizeDownCount>0 && System.currentTimeMillis() - sizeDownTime >= 4000) {
+                player.sizeDown(playerPoint);
+                sizeDownCount--;
+            }
         }
 
     }
@@ -109,8 +120,17 @@ public class GameplayScene implements Scene {
     public void recieveTouch(MotionEvent event) {
         switch(event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                if(!gameOver && player.getRectangle().contains((int)event.getX(), (int)event.getY()))
+                if(doubleClick && System.currentTimeMillis() - doubleClickTime <= 1000 && sizeDownCount<3) {
+                    player.sizeUp(playerPoint);
+                    sizeDownTime = System.currentTimeMillis();
+                    doubleClick=false;
+                    sizeDownCount++;
+                }
+                if(!gameOver && player.getRectangle().contains((int)event.getX(), (int)event.getY())) {
                     movingPlayer = true;
+                    doubleClick=true;
+                    doubleClickTime = System.currentTimeMillis();
+                }
                 if(gameOver && System.currentTimeMillis() - gameOverTime >= 2000) {
                     reset();
                     gameOver = false;
@@ -126,6 +146,10 @@ public class GameplayScene implements Scene {
                 movingPlayer = false;
                 break;
         }
+
+    }
+
+    private void updateSize() {
 
     }
 

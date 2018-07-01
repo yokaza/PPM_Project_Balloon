@@ -40,6 +40,13 @@ public class Player implements GameObject{
 
     }
 
+    public void sizeUp(Point point){
+        rectangle.set(point.x - rectangle.width(), point.y - rectangle.height(), point.x + rectangle.width(), point.y + rectangle.height());
+    }
+    public void sizeDown(Point point){
+        rectangle.set(point.x - rectangle.width()/4, point.y - rectangle.height()/4, point.x + rectangle.width()/4, point.y + rectangle.height()/4);
+    }
+
     @Override
     public void draw(Canvas canvas) {
         /*

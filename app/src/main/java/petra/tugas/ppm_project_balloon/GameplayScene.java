@@ -1,10 +1,12 @@
 package petra.tugas.ppm_project_balloon;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Vibrator;
 import android.view.MotionEvent;
 
 public class GameplayScene implements Scene {
@@ -42,7 +44,6 @@ public class GameplayScene implements Scene {
         orientationData = new OrientationData();
         orientationData.register();
         frameTime = System.currentTimeMillis();
-
     }
 
     public void reset() {
@@ -136,6 +137,9 @@ public class GameplayScene implements Scene {
                     gameOver = false;
                     orientationData.newGame();
                     terminate();
+
+
+
                 }
                 break;
             case MotionEvent.ACTION_MOVE:

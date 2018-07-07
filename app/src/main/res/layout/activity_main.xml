@@ -16,6 +16,14 @@
         android:textSize="30sp"
         android:layout_margin="25dp"/>
 
+    <EditText
+        android:id="@+id/_Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
     <Button
         android:id="@+id/_Play"
         android:layout_width="match_parent"
@@ -24,11 +32,8 @@
         android:onClick="PlayGame"
         android:text="PLAY" />
 
-    <Button
-        android:id="@+id/_hScores"
+    <ListView
+        android:id="@+id/_sSheet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:onClick="HighScores"
-        android:text="HIGHSCORES" />
+        android:layout_height="match_parent" />
 </LinearLayout>

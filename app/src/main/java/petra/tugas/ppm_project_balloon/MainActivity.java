@@ -1,9 +1,15 @@
 package petra.tugas.ppm_project_balloon;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -14,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -48,6 +55,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            getPermissionToRecordAudio();
+        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -129,5 +139,19 @@ public class MainActivity extends Activity {
         String _UserName = et1.getText().toString();
         Constants.PLAYER_NAME = _UserName;
         startActivity(in);
+    }
+    @RequiresApi(api= Build.VERSION_CODES.M)
+    public void getPermissionToRecordAudio(){
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED)
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO},123);
+    }
+    @RequiresApi(api=Build.VERSION_CODES.M)
+
+    public void onRequestPermissionResult(int requestCode, @NonNull String permission[], @NonNull int[] grantResults){
+        if(requestCode==123){
+            if(grantResults.length ==1 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(this,"record audio permission granted",Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

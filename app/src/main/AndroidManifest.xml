@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="petra.tugas.ppm_project_balloon">
+    package="petra.tugas.ppm_project_balloon"
+    android:versionCode="1"
+    android:versionName="1.0.0">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -22,4 +25,7 @@
         </activity>
         <activity android:name=".GameActivity"></activity>
     </application>
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="8" />
 </manifest>

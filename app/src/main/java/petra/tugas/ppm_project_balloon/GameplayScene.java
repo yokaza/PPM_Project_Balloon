@@ -1,5 +1,6 @@
 package petra.tugas.ppm_project_balloon;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -31,8 +32,11 @@ public class GameplayScene implements Scene {
     private long sizeDownTime;
     private int sizeDownCount=0;
     private boolean firstUp=false;
+    private Vibrator vibrator;
+    private SoundMeter sound;
+    Context context;
 
-    public GameplayScene() {
+    public GameplayScene(Context context) {
         //player
         //
         player = new Player(new Rect(0,0,Constants.SCREEN_WIDTH/10,Constants.SCREEN_WIDTH/10), Color.rgb(255, 0,0 ));
@@ -44,6 +48,9 @@ public class GameplayScene implements Scene {
         orientationData = new OrientationData();
         orientationData.register();
         frameTime = System.currentTimeMillis();
+        vibrator = (Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
+        sound = new SoundMeter();
+        sound.start();
     }
 
     public void reset() {
@@ -70,17 +77,14 @@ public class GameplayScene implements Scene {
                 playerPoint.x += Math.abs(xSpeed * elapsedTime) > 5 ? xSpeed*elapsedTime : 0;
                 //playerPoint.y -= Math.abs(ySpeed * elapsedTime) > 5 ? ySpeed*elapsedTime : 0;
             }
-
-            //
             if(orientationData.getProx()){
-                System.out.println("dekat");
-                if(sizeDownCount<2) {
+                if (sizeDownCount < 2) {
                     player.sizeUp(playerPoint);
                     sizeDownTime = System.currentTimeMillis();
                     sizeDownCount++;
                 }
             }else{
-                //System.out.println("jauh");
+
             }
 
             if(playerPoint.x < 0)
@@ -99,11 +103,29 @@ public class GameplayScene implements Scene {
             if (obstacleManager.playerCollode(player)) {
                 gameOver = true;
                 gameOverTime = System.currentTimeMillis();
+                vibrator.vibrate(1000);
+                //sound.stop();
             }
             if(sizeDownCount>0 && System.currentTimeMillis() - sizeDownTime >= 4000) {
                 player.sizeDown(playerPoint);
                 sizeDownCount--;
             }
+            double x = sound.getAmplitude();
+            if(sizeDownCount>1){
+
+            }else {
+                if (x > 9500) {
+                    System.out.println(x + " x ada suara");
+                    if (sizeDownCount < 2) {
+                        player.sizeUp(playerPoint);
+                        sizeDownTime = System.currentTimeMillis();
+                        sizeDownCount++;
+                    }
+                } else {
+                    System.out.println("gaada");
+                }
+            }
+
         }
 
     }

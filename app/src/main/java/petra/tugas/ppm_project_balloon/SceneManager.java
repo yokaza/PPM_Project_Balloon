@@ -1,6 +1,7 @@
 package petra.tugas.ppm_project_balloon;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
@@ -10,11 +11,12 @@ public class SceneManager{
     private ArrayList<Scene> scenes = new ArrayList<>();
     public static int ACTIVE_SCENE;
     public static boolean RETRY=true;
+    Context context;
 
-    public SceneManager() {
+    public SceneManager(Context context) {
         ACTIVE_SCENE = 0;
         if(ACTIVE_SCENE==0) {
-            scenes.add(new GameplayScene());
+            scenes.add(new GameplayScene(context));
             RETRY=true;
         }
     }

@@ -11,12 +11,14 @@ public class GameActivity extends Activity {
     SQLiteDatabase sqlitedb;
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
+        System.out.print("Pause");
         final DBHelper DB = new DBHelper(this);
         sqlitedb = DB.getWritableDatabase();
         DB.onCreate(sqlitedb);
         DB.InsertData(sqlitedb, Constants.PLAYER_NAME,Constants.PLAYER_SCORE);
+        System.out.print("Masuk Database");
     }
 
     /**

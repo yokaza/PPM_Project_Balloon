@@ -10,9 +10,13 @@ public class OrientationData implements SensorEventListener {
     private SensorManager manager;
     private Sensor accelerometer;
     private Sensor magnometer;
+    private Sensor proximity;
 
     private float[] accelOutput;
     private float[] magOutput;
+    //
+    private boolean proxout;
+    public boolean getProx(){return proxout;}
 
     private float[] orientations = new float[3];
     public float[] getOrientations() {
@@ -31,11 +35,15 @@ public class OrientationData implements SensorEventListener {
         manager = (SensorManager)Constants.CURRENT_CONTEXT.getSystemService(Context.SENSOR_SERVICE);
         accelerometer = manager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnometer = manager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        //
+        proximity = manager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
     }
 
     public void register() {
         manager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         manager.registerListener(this, magnometer, SensorManager.SENSOR_DELAY_GAME);
+        //
+        manager.registerListener(this,proximity,SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
@@ -54,6 +62,14 @@ public class OrientationData implements SensorEventListener {
                     startOrientation = new float[orientations.length];
                     System.arraycopy(orientations, 0, startOrientation, 0, orientations.length);
                 }
+            }
+        }
+        //
+        if(event.sensor.getType() == Sensor.TYPE_PROXIMITY){
+            if(event.values[0] <proximity.getMaximumRange()){
+                proxout=true;
+            }else{
+                proxout=false;
             }
         }
     }

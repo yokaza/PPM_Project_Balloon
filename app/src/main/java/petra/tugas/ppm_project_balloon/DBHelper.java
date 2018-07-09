@@ -35,6 +35,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String nm;
         cursor.moveToPosition(pos);
+        ////
         if (!cursor.isAfterLast()) {
             cursor.moveToPosition(pos);
             nm = cursor.getString(1);
@@ -42,6 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
             nm = "No One";
         return nm;
     }
+    ////
     public int GetData2(SQLiteDatabase db, int pos) {
         db = this.getReadableDatabase();
         Cursor cursor = db.query(TableName, new String[] {id, Nama, score}, null, null, null, null, "score DESC");

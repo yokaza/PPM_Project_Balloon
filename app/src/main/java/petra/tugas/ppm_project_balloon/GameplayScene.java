@@ -71,6 +71,18 @@ public class GameplayScene implements Scene {
                 //playerPoint.y -= Math.abs(ySpeed * elapsedTime) > 5 ? ySpeed*elapsedTime : 0;
             }
 
+            //
+            if(orientationData.getProx()){
+                System.out.println("dekat");
+                if(sizeDownCount<2) {
+                    player.sizeUp(playerPoint);
+                    sizeDownTime = System.currentTimeMillis();
+                    sizeDownCount++;
+                }
+            }else{
+                //System.out.println("jauh");
+            }
+
             if(playerPoint.x < 0)
                 playerPoint.x = 0;
             else if(playerPoint.x > Constants.SCREEN_WIDTH)
